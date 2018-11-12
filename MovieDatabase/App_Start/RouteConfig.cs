@@ -16,7 +16,13 @@ namespace MovieDatabase
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Movies", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "MovieDetails",
+                url: "{controller}/{action}/{movieID}",
+                defaults: new { controller = "Home", action = "MovieDetails", id = UrlParameter.Optional }
             );
         }
     }

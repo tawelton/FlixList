@@ -1,0 +1,49 @@
+﻿@model List<MovieDatabase.Models.Movie>
+@{
+    ViewBag.Title = "Movies";
+}
+
+
+<section class="no-padding-top margin-top-sm margin-bottom-sm">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>@ViewBag.Title</h2>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="no-padding-top">
+    <div class="container-fluid">
+        <div class="row">
+            @foreach (var movie in Model)
+            {
+            <div class="col-lg-2 col-md-3 col-sm-6">
+                <div class="block poster" onmouseover="showOverlay(this)" onmouseout="hideOverlay(this)" style="background-image: url('@movie.posterURL');" >
+                    <a href="@Url.Action("MovieDetails", "Home", new {movieID = movie.movieID })" class="overlay hidden">
+
+                            <div class="movieTitle" id="@movie.title">
+                                <strong>@movie.title</strong>
+                            </div>
+                    </a>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</section>
+
+<script>
+    (function () {
+        document.getElementById('Movies').className = 'active';
+    })();
+
+    function showOverlay(event) {
+        event.childNodes[1].className = "overlay";
+    }
+
+    function hideOverlay(event) {
+        event.childNodes[1].className = "overlay hidden"
+    }
+
+</script>
