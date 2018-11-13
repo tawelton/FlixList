@@ -1,0 +1,35 @@
+﻿@model MovieDatabase.Models.UserMovie
+@{
+    ViewBag.Title = "My Movie Details";
+}
+
+<section class="no-padding-top margin-top-sm">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-3 col-md-6">
+                <div class="poster" style="background-image: url('@Model.movie.posterURL');" alt="@Model.movie.title"> </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="row justify-content-center margin-top-sm">
+                    <div class="col-12">
+                        <ul class="list-unstyled">
+                            <li><h2>@Model.movie.title</h2></li>
+                            <li>Duration: @Model.movie.duration</li>
+                            <li>Release Year: -2018-</li>
+                            <li>Rating: -PG-13-</li>
+                        </ul>
+                    </div>
+                    <div class="col-12">
+                        Locations: </br>
+                        <ul class="list-unstyled">
+                            @foreach (var location in Model.locations)
+                            {
+                                <li><img src="@location" style="height:1.5em;"/></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
