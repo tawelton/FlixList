@@ -210,6 +210,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-MovieDatabase-20181110062718.mdf" />
+    <Content Include="App_Data\aspnet-MovieDatabase-20181110062718_log.ldf">
+      <DependentUpon>aspnet-MovieDatabase-20181110062718.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -701,7 +705,6 @@
     <Content Include="Views\Library\MyMovieDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Theme\vendor\font-awesome\less\" />
     <Folder Include="Theme\vendor\font-awesome\scss\" />
     <Folder Include="ViewModels\" />
