@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "My Library";
 }
-@model  KeyValuePair<string,List<MovieDatabase.Models.UserMovie>>
+@model  List<MovieDatabase.Models.UserMovie>
 
 
 <section class="no-padding-top margin-top-sm margin-bottom-sm">
@@ -17,7 +17,7 @@
     <div class="container-fluid">
         <div class="row">
 
-            @foreach (var userMovie in Model.Value)
+            @foreach (var userMovie in Model)
             {
             <div class="col-lg-2 col-md-3 col-sm-6">
                 <div class="block poster" onmouseover="showOverlay(this)" onmouseout="hideOverlay(this)" style="background-image: url('@userMovie.movie.posterURL');">

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MovieDatabase.Models;
+using MovieDatabase.Controllers;
 
 namespace MovieDatabase.Controllers
 {
@@ -113,6 +114,14 @@ namespace MovieDatabase.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult MovieDetails(int movieID)
+        {
+            LibraryController.userLibrary[User.Identity.Name].Add(movieID, new string[] { "https://s3.amazonaws.com/freebiesupply/large/2x/hulu-logo-white.png", "http://www.logosvectorfree.com/wp-content/uploads/2017/12/Netflix-Logo-Icons-png.png", "https://mbtskoudsalg.com/images/amazon-instant-video-png.png" });
 
             return View();
         }

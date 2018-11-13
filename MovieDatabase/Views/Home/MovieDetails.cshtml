@@ -26,6 +26,17 @@
                     <li>Release Year: -2018-</li>
                     <li>Rating: -PG-13-</li>
                 </ul>
+                @if (User.Identity.IsAuthenticated)
+                {
+                <form id="form1" method="post">
+                    <div>
+                        <input name="movieID" type="hidden" value="@Model.movieID" />
+                    </div>
+                    <div>
+                        <input type="submit" value="Add to My Library" />
+                    </div>
+                </form>
+                }
             </div>
         </div>
     </div>
