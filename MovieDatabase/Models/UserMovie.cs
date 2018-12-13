@@ -9,5 +9,11 @@ namespace MovieDatabase.Models
     {
         public Movie movie { get; set; }
         public List<Location> locations { get; set; }
+
+        public UserMovie (Movie mMovie, List<Location> lLocations)
+        {
+            movie = mMovie;
+            locations = lLocations;
+        }
     }
 }
