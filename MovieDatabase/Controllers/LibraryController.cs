@@ -58,15 +58,26 @@ namespace MovieDatabase.Controllers
                 return RedirectToAction("MyLibrary");
             }
 
-            /*
-            UserMovie selectedUserMovie = userLibrary.Find(userMovie => userMovie.movie.movieID == movieIDParsed);
+            Movie retrievedMovie = db.Movies.Find(movieIDParsed);
 
-
-            if (selectedUserMovie == null)
+            if (retrievedMovie == null)
             {
                 return RedirectToAction("MyLibrary");
             }
-            */
+
+            UserMovie selectedUserMovie = new UserMovie();
+
+            selectedUserMovie.movie = retrievedMovie;
+
+            string currentUserID = User.Identity.GetUserId();
+
+            List<UserLibrary> userMovieLocations = db.UserLibraries.Where(library => library.userID == currentUserID).ToList();
+
+            foreach(UserLibrary userMovie in userMovieLocations)
+            {
+                selectedUserMovie.locations.Add(db.Locations.Find(userMovie.locationID));
+            }
+
 
             return View();
         }

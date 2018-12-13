@@ -14,5 +14,8 @@ namespace MovieDatabase.Models
         public int locationID { get; set; }
         public string decription { get; set; }
         public string logoURL { get; set; }
+
+        [NotMapped]
+        public bool selected { get; set; }
     }
 }
