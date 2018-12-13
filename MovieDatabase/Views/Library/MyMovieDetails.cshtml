@@ -3,36 +3,39 @@
     ViewBag.Title = Model.movie.title;
 }
 
-<section class="no-padding-top margin-top-sm">
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-lg-3 col-md-6">
-                <div class="poster" style="background-image: url('@Model.movie.posterURL');" alt="@Model.movie.title"> </div>
-                <button class="btn btn-primary btn-block mt-3" value="Remove from My Library" href="@Url.Action("RemoveFromLibrary", "Library", new { movieID = Model.movie.movieID })">
-                    Remove from My Library
-                </button>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="row justify-content-center margin-top-sm">
-                    <div class="col-12">
-                        <ul class="list-unstyled">
-                            <li><h2>@Model.movie.title</h2></li>
-                            <li>Release Year: @Model.movie.yearReleased</li>
-                            <li>Rating: @Model.movie.rating</li>
-                        </ul>
-                    </div>
-                    <div class="col-12">
-                        <span class="mb-2">Locations: </span>
-                        <ul class="list-unstyled">
+@using (Html.BeginForm("MyMovieDetails", "Library", null, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <section class="no-padding-top margin-top-sm">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-lg-3 col-md-6">
+                    <div class="poster" style="background-image: url('@Model.movie.posterURL');" alt="@Model.movie.title"> </div>
+                    @Html.HiddenFor(movieID => Model.movie.movieID)
+                    <button class="btn btn-primary btn-block mt-3" value="Remove from My Library" type="submit">
+                        Remove from My Library
+                    </button>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="row justify-content-center margin-top-sm">
+                        <div class="col-12">
+                            <ul class="list-unstyled">
+                                <li><h2>@Model.movie.title</h2></li>
+                                <li>Release Year: @Model.movie.yearReleased</li>
+                                <li>Rating: @Model.movie.rating</li>
+                            </ul>
+                        </div>
+                        <div class="col-12">
+                            <span class="mb-2">Locations: </span>
                             @foreach (var location in Model.locations)
                             {
-                                <img src="@location.logoURL" style="height:3em;" />
+                                <img src="@location.logoURL" class="movie-logo" />
                             }
-                        </ul>
-                        <button class="btn btn-secondary btn-xs" value="Edit Locations" href="@Url.Action("EditMovie", "Library", new { movieID = Model.movie.movieID })">Edit Locations</button>
+                            <button class="btn btn-secondary btn-xs" value="Edit Locations" href="@Url.Action("EditMovie", "Library", new { movieID = Model.movie.movieID })">Edit Locations</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+}

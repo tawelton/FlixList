@@ -84,5 +84,13 @@ namespace MovieDatabase.Controllers
 
             return View(selectedUserMovie);
         }
+
+        [HttpPost]
+        public ActionResult MyMovieDetails(UserMovie movieToRemove)
+        {
+            db.Database.ExecuteSqlCommand("DELETE FROM UserLibrary WHERE movieID = '" + movieToRemove.movie.movieID + "' AND userID = '" + User.Identity.GetUserId() + "';");
+
+            return RedirectToAction("MyLibrary");
+        }
     }
 }

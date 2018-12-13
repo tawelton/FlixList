@@ -59,6 +59,10 @@ body {
     border-radius: .2rem;
 }
 
+.movie-logo {
+    height: 3em;
+}
+
 /*.footer {
     position: relative !important;
 }*/
