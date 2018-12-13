@@ -12,7 +12,7 @@ namespace MovieDatabase.Models
     {
         [Key]
         public int locationID { get; set; }
-        public string decription { get; set; }
+        public string description { get; set; }
         public string logoURL { get; set; }
 
         [NotMapped]

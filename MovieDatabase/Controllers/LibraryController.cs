@@ -51,6 +51,7 @@ namespace MovieDatabase.Controllers
 
             UserMovie selectedUserMovie = new UserMovie();
 
+            selectedUserMovie.locations = new List<Location>();
             selectedUserMovie.movie = retrievedMovie;
 
             string currentUserID = User.Identity.GetUserId();
@@ -59,11 +60,13 @@ namespace MovieDatabase.Controllers
 
             foreach(UserLibrary userMovie in userMovieLocations)
             {
-                selectedUserMovie.locations.Add(db.Locations.Find(userMovie.locationID));
+                Location retrievedLocation = db.Locations.Find(userMovie.locationID);
+
+                selectedUserMovie.locations.Add(retrievedLocation);
             }
 
 
-            return View();
+            return View(selectedUserMovie);
         }
     }
 }
