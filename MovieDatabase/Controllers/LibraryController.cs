@@ -20,7 +20,7 @@ namespace MovieDatabase.Controllers
             
             List<Movie> userLibrary = new List<Movie>();
 
-            string userLibraryQuery = "SELECT movieID, title, posterURL FROM(SELECT DISTINCT userID, movie.movieID, movie.title, movie.posterURL FROM UserLibrary INNER JOIN Movie ON UserLibrary.movieID = Movie.movieID) AS Movies WHERE userID = " + User.Identity.GetUserId() + "; ";
+            string userLibraryQuery = "SELECT * FROM Movie";
 
             userLibrary = db.Database.SqlQuery<Movie>(userLibraryQuery).ToList();
 
