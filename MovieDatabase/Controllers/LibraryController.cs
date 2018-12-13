@@ -12,7 +12,7 @@ namespace MovieDatabase.Controllers
     [Authorize]
     public class LibraryController : Controller
     {
-        private FlixListContext db { get; set; }
+        private FlixListContext db = new FlixListContext();
 
         // GET: MyLibrary
         public ActionResult MyLibrary()
