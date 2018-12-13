@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "My Library";
 }
-@model  KeyValuePair<string,List<MovieDatabase.Models.UserMovie>>
+@model  List<MovieDatabase.Models.Movie>
 
 
 <section class="no-padding-top margin-top-sm margin-bottom-sm">
@@ -16,31 +16,31 @@
 <section class="no-padding-top">
     <div class="container-fluid">
         <div class="row">
-
-            @foreach (var userMovie in Model.Value)
+            @*Generate movie poster, poster overlay, and title overlay for each movie in list of movies*@
+            @foreach (var movie in Model)
             {
-            <div class="col-lg-2 col-md-3 col-sm-6">
-                <div class="block poster" onmouseover="showOverlay(this)" onmouseout="hideOverlay(this)" style="background-image: url('@userMovie.movie.posterURL');">
-                    <a href="@Url.Action("MyMovieDetails", "Library", new { movieID = userMovie.movie.movieID })" class="overlay hidden">
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                    <div class="block poster" onmouseover="showOverlay(this)" onmouseout="hideOverlay(this)" style="background-image: url('@movie.posterURL');">
+                        <a href="@Url.Action("MyMovieDetails", "Library", new { movieID = movie.movieID })" class="overlay hidden">
 
-                        <div class="movieTitle" id="@userMovie.movie.title">
-                            <strong>@userMovie.movie.title</strong>
-                        </div>
-                    </a>
+                            <div class="movieTitle" id="@movie.title">
+                                <strong>@movie.title</strong>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-            </div>
             }
-            
+
         </div>
     </div>
 </section>
 
 <script>
-
+    @* Apply active class to currently selected sidebar item *@
     (function () {
         document.getElementById('MyLibrary').className = 'active';
     })();
-
+    @* Functions for showing and hidding the movie overlay divs *@
     function showOverlay(event) {
             event.childNodes[1].className = "overlay";
         }

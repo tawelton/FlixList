@@ -1,4 +1,23 @@
-﻿@model List<MovieDatabase.Models.Movie>
+﻿@*
+   
+    GROUP 2-7
+        Tanner Welton
+        John Martin
+        Sophia Jensen
+        Reeves Westover
+
+    This website is meant to help movie watchers know what movies they can watch and where to watch them, whether that be Netflix, Hulu, Amazon Prime Video, Vudu, etc.
+    The user will add the movie to their library, input the known online streaming locations for watching the movie, and then they can view that newly-added movie in
+    their movie library. The details for this movie can then be edit and updated or the movie can be removed from their library entirely.
+
+    The current site allows for account creation, however the my library features are currently hardcoded as there is no backend storage to store the user's selections.
+    This will be added for Project 2.
+
+*@
+
+
+
+@model List<MovieDatabase.Models.Movie>
 @{
     ViewBag.Title = "Movies";
 }
@@ -16,6 +35,7 @@
 <section class="no-padding-top">
     <div class="container-fluid">
         <div class="row">
+            @*Generate movie poster, poster overlay, and title overlay for each movie in list of movies*@
             @foreach (var movie in Model)
             {
             <div class="col-lg-2 col-md-3 col-sm-6">
@@ -34,10 +54,11 @@
 </section>
 
 <script>
+    @*Apply active class to currently selected sidebar item*@
     (function () {
         document.getElementById('Movies').className = 'active';
     })();
-
+    @*Functions for showing and hidding the movie overlay divs*@
     function showOverlay(event) {
         event.childNodes[1].className = "overlay";
     }

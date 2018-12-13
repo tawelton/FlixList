@@ -9,6 +9,7 @@ namespace MovieDatabase.Controllers
 {
     public class HomeController : Controller
     {
+        //Sample data for the Movies view
         public static List<Movie> movies = new List<Movie>{
             new Movie(
                 "Jaws", 
@@ -75,17 +76,20 @@ namespace MovieDatabase.Controllers
 
         public ActionResult Movies(string search)
         {
+            // check if no search criteria
             if (search == null)
             {
                 return View(movies);
             }
 
+            //return list of movies matching search result
             List<Movie> searchResults = movies.FindAll(movie => movie.title.ToUpper().Contains(search.ToUpper()));
             return View(searchResults);
         }
 
         public ActionResult MovieDetails(string movieID)
         {
+            // convert the movieID string to an integer
             int movieIDParsed = int.TryParse(movieID, out movieIDParsed) ? movieIDParsed: -1;
 
             if (movieIDParsed == -1)
@@ -93,15 +97,16 @@ namespace MovieDatabase.Controllers
                 return RedirectToAction("Movies", new { movieID = movieID});
             }
             
-
+            // check if movieID is passed and redirect to movies view if none
             if (movieID == null)
             {
                 return RedirectToAction("Movies");
             }
 
+            // check if movie is in list of movies
             Movie selectedMovie = movies.Find(movie => movie.movieID == movieIDParsed);
 
-            
+            // redirect to movies view if movie not found
             if (selectedMovie == null)
             {
                 return RedirectToAction("Movies");
@@ -112,6 +117,7 @@ namespace MovieDatabase.Controllers
 
         public ActionResult Contact()
         {
+            // will use this method in the future
             ViewBag.Message = "Your contact page.";
 
             return View();
