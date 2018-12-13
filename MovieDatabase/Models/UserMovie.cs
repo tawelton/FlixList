@@ -9,11 +9,5 @@ namespace MovieDatabase.Models
     {
         public Movie movie { get; set; }
         public List<Location> locations { get; set; }
-
-        public UserMovie(Movie movie, List<Location> locations)
-        {
-            this.movie = movie;
-            this.locations = locations;
-        }
     }
 }
