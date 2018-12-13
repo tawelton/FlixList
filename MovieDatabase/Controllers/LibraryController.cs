@@ -27,6 +27,22 @@ namespace MovieDatabase.Controllers
             return View(userLibrary);
         }
 
+        public ActionResult EditMovie(int id)
+        {
+            Movie movie = db.Movies.FirstOrDefault(m => m.movieID == id);
+            List<Location> locations = db.Locations.ToList();
+
+            UserMovie UserMovieModel = new UserMovie(movie,locations);
+
+            string userId = User.Identity.GetUserId();
+
+           
+
+
+
+            return View(UserMovieModel);
+        }
+
         public ActionResult MyMovieDetails(string movieID)
         {
             int movieIDParsed = int.TryParse(movieID, out movieIDParsed) ? movieIDParsed : -1;
