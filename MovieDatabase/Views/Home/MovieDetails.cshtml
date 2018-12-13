@@ -7,20 +7,19 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-lg-3 col-md-6">
-                @*Display the movie poster*@
                 <div class="poster" style="background-image: url('@Model.posterURL');" alt="@Model.title"> </div>
             </div>
-        </div>
-        <div class="row justify-content-center margin-top-sm">
-            <div class="col-lg-5 col-md-8">
-                @*Display the movie information*@
-                <ul class="list-unstyled">
-                    <li><h2>@Model.title</h2></li>
-                    <li>Duration: @Model.duration</li>
-                    <li>Release Year: -2018-</li>
-                    <li>Rating: -PG-13-</li>
-                </ul>
-                <button class="btn btn-primary" value="Add to My Library">Add to My Library</button>
+            <div class="col-lg-4 col-md-6">
+                <div class="row justify-content-center margin-top-sm">
+                    <div class="col-12">
+                        <ul class="list-unstyled">
+                            <li><h2>@Model.title</h2></li>
+                            <li>Release Year: @Model.yearReleased</li>
+                            <li>Rating: @Model.rating</li>
+                        </ul>
+                        <button class="btn btn-primary" value="Add to My Library">Add to My Library</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

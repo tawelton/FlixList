@@ -49,8 +49,11 @@ namespace MovieDatabase.Controllers
             {
                 return RedirectToAction("Movies");
             }
+            else
+            {
+                return View(selectedMovie.First());
+            }
 
-            return View(selectedMovie);
         }
 
         public ActionResult Contact()

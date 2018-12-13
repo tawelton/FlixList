@@ -15,7 +15,7 @@ namespace MovieDatabase.Models
         public string title { get; set; }
         public string description { get; set; }
         public string rating { get; set; }
-        public string duration { get; set; }
+        public int yearReleased { get; set; }
         public string posterURL { get; set; }
         public string imdbURL { get; set; }
     }
