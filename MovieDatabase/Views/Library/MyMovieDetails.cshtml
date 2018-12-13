@@ -8,6 +8,9 @@
         <div class="row justify-content-center">
             <div class="col-lg-3 col-md-6">
                 <div class="poster" style="background-image: url('@Model.movie.posterURL');" alt="@Model.movie.title"> </div>
+                <button class="btn btn-primary btn-block mt-3" value="Remove from My Library" href="@Url.Action("RemoveFromLibrary", "Library", new { movieID = Model.movie.movieID })">
+                    Remove from My Library
+                </button>
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="row justify-content-center margin-top-sm">
@@ -19,14 +22,14 @@
                         </ul>
                     </div>
                     <div class="col-12">
-                        Locations: </br>
+                        <span class="mb-2">Locations: </span>
                         <ul class="list-unstyled">
                             @foreach (var location in Model.locations)
                             {
-                                <li><img src="@location" style="height:1.5em;" /></li>
+                                <img src="@location.logoURL" style="height:3em;" />
                             }
                         </ul>
-                        <button class="btn btn-primary" value="Remove from My Library">Remove from My Library</button>
+                        <button class="btn btn-secondary btn-xs" value="Edit Locations" href="@Url.Action("EditMovie", "Library", new { movieID = Model.movie.movieID })">Edit Locations</button>
                     </div>
                 </div>
             </div>
