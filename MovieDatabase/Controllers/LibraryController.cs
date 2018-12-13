@@ -30,14 +30,25 @@ namespace MovieDatabase.Controllers
         public ActionResult EditMovie(int id)
         {
             Movie movie = db.Movies.FirstOrDefault(m => m.movieID == id);
+
+            if (movie == null)
+            {
+                RedirectToAction("Index");
+            }
+
             List<Location> locations = db.Locations.ToList();
-
-            UserMovie UserMovieModel = new UserMovie(movie,locations);
-
             string userId = User.Identity.GetUserId();
 
-           
+            List<int> userLocationIds = db.Database.SqlQuery<int>("SELECT locationID FROM UserLibrary WHERE userID = '" + userId + "' AND movieID = '" + id + "';").ToList();
 
+            foreach (Location l in locations)
+            {
+                if (userLocationIds.Contains(l.locationID))
+                {
+                    l.selected = true;
+                }
+            }
+            UserMovie UserMovieModel = new UserMovie(movie, locations);
 
 
             return View(UserMovieModel);
