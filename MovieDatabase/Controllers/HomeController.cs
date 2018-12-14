@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using MovieDatabase.DAL;
 using MovieDatabase.Models;
+using Microsoft.AspNet.Identity;
 
 namespace MovieDatabase.Controllers
 {
@@ -27,6 +28,8 @@ namespace MovieDatabase.Controllers
 
         public ActionResult MovieDetails(string movieID)
         {
+            //get UserID
+            string currentUser = User.Identity.GetUserId();
             // convert the movieID string to an integer
             int movieIDParsed = int.TryParse(movieID, out movieIDParsed) ? movieIDParsed: -1;
 
@@ -50,7 +53,7 @@ namespace MovieDatabase.Controllers
                 return RedirectToAction("Movies");
             }
 
-            if (db.UserLibraries.Find(movieIDParsed) != null)
+            if (db.UserLibraries.FirstOrDefault(ul => ul.movieID == movieIDParsed && ul.userID == currentUser) != null)
             {
                 ViewBag.ButtonText = "Edit Locations";
             }
