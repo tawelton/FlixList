@@ -27,11 +27,19 @@
                         </div>
                         <div class="col-12">
                             <span class="mb-2">Locations: </span>
-                            @foreach (var location in Model.locations)
-                            {
-                                <img src="@location.logoURL" class="movie-logo" />
-                            }
-                            <a class="btn btn-secondary btn-xs" value="Edit Locations" href="@Url.Action("EditMovie", "Library", new { movieID = Model.movie.movieID })">Edit Locations</a>
+                            <div class="row">
+                                <div class="col-12">
+                                    @foreach (var location in Model.locations)
+                                    {
+                                        <img src="@location.logoURL" class="movie-logo" />
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <a class="btn btn-secondary btn-xs" value="Edit Locations" href="@Url.Action("EditMovie", "Library", new { movieID = Model.movie.movieID })">Edit Locations</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

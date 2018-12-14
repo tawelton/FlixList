@@ -4,67 +4,53 @@
     ViewBag.Title = "EditMovie";
 }
 
+@using (Html.BeginForm())
+{
+    <div class="container mb-3">
+        <hr />
+        <h2>@Model.movie.title</h2>
+        <hr />
+        @Html.HiddenFor(model => model.movie.movieID)
 
-<div class="container">
-    <hr />
-    <h2>@Model.movie.title</h2>
-    <hr />
-    <div class="row">
-        <div class="col-md-4>">
-            <img src="@Model.movie.posterURL" alt="@Model.movie.title" />
-        </div>
-        <div class="col-md-8">
-            
-            <dl class="dl-horizontal">
-                <dt>
-   
-</div>                 @Html.DisplayNameFor(model => model.movie.yearReleased)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.movie.yearReleased)
-                </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.movie.rating)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.movie.rating)
-                </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.movie.description)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.movie.description)
-                </dd>
-            </dl>
-        </div>
+        @Html.HiddenFor(model => model.movie.title)
+        
+        @Html.HiddenFor(model => model.movie.yearReleased)
 
+        @Html.HiddenFor(model => model.movie.rating)
+
+        @Html.HiddenFor(model => model.movie.description)
+
+        @Html.HiddenFor(model => model.movie.posterURL)
+
+        @Html.HiddenFor(model => model.movie.imdbURL)
+
+        <div class="row justify-content-center">
+            <div class="col-xs-12 col-sm-10 col-md-8">
+                <div class="container">
+                    <div class="row">
+
+                        @foreach (var location in Model.locations)
+                        {
+                            <div class="col-xs-4 col-sm-3 col-md-4 ">
+                                <label class="image-checkbox">
+                                    <img src="@location.logoURL" alt="@location.description" class="img-fluid" />
+                                    @Html.CheckBoxFor(model => location.selected)
+
+                                </label>
+                            </div>
+                        }
+
+                    </div>
+                    <div class="row justify-content-md-center mb-5 mt-5">
+                        <div class="col-md-3">
+                            <input type="submit" class="btn btn-primary btn-lg btn-block" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-<div class="container">
-    @using (Html.BeginForm())
-    {
-        <table class="table">
-            <tr>
-                @for (int i = 0; i < Model.locations.Count(); i++)
-                {
-                    <th><img src="@Model.locations[i].logoURL" alt="@Model.locations[i].description" class="movie-logo" /></th>
-                }
-            </tr>
-            <tr>
-                @for (int i = 0; i < Model.locations.Count(); i++)
-                {
-                    <td>
-                        <center>
-                            @Html.CheckBoxFor(model => model.locations[i].selected)
-                        </center>
-                    </td>
-                }
-            </tr>
-
-        </table>
-
-        <input type="submit" class="btn btn-primary mb-5"/>
-    }
-</div>
+}
 
 <script type="text/javascript">
     // image gallery
