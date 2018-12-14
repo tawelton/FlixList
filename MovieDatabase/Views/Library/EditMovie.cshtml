@@ -29,15 +29,18 @@
                 <div class="container">
                     <div class="row">
 
-                        @foreach (var location in Model.locations)
+                        @for (int i = 0; i < Model.locations.Count(); i++)
                         {
-                            <div class="col-xs-4 col-sm-3 col-md-4 ">
-                                <label class="image-checkbox">
-                                    <img src="@location.logoURL" alt="@location.description" class="img-fluid" />
-                                    @Html.CheckBoxFor(model => location.selected)
+                        <div class="col-xs-4 col-sm-3 col-md-4 ">
+                            <label class="image-checkbox">
+                                <img src="@Model.locations[i].logoURL" alt="@Model.locations[i].description" class="img-fluid" />
+                                @Html.CheckBoxFor(model => Model.locations[i].selected)
+                                @Html.HiddenFor(model => Model.locations[i].locationID)
+                                @Html.HiddenFor(model => Model.locations[i].description)
+                                @Html.HiddenFor(model => Model.locations[i].logoURL)
 
-                                </label>
-                            </div>
+                            </label>
+                        </div>
                         }
 
                     </div>

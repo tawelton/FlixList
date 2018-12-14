@@ -117,7 +117,7 @@ namespace MovieDatabase.Controllers
 
             string currentUserID = User.Identity.GetUserId();
 
-            List<UserLibrary> userMovieLocations = db.UserLibraries.Where(library => library.userID == currentUserID).ToList();
+            List<UserLibrary> userMovieLocations = db.UserLibraries.Where(library => library.userID == currentUserID && library.movieID == movieIDParsed).ToList();
 
             foreach(UserLibrary userMovie in userMovieLocations)
             {
