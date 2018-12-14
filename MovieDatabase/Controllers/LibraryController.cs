@@ -57,8 +57,35 @@ namespace MovieDatabase.Controllers
         [HttpPost]
         public ActionResult EditMovie(UserMovie model)
         {
+            string currentUser = User.Identity.GetUserId();
+            if (ModelState.IsValid)
+            {
+                foreach (Location l in model.locations)
+                {
+                    if (!l.selected)
+                    {
+                        var itemToRemove = db.UserLibraries.FirstOrDefault(ul => ul.userID == currentUser && ul.movieID == model.movie.movieID && ul.locationID == l.locationID);
+                        if (itemToRemove != null)
+                        {
+                            db.UserLibraries.Remove(itemToRemove);
+                            db.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        UserLibrary itemToAdd = new UserLibrary() { userID = currentUser, locationID = l.locationID, movieID = model.movie.movieID };
 
-            return View(model.movie.movieID);
+                        db.UserLibraries.Add(itemToAdd);
+                        db.SaveChanges();
+                    }
+                }
+                return RedirectToAction("MyLibrary");
+            }
+            else
+            {
+                return View(model.movie.movieID);
+            }
+            
         }
 
         public ActionResult MyMovieDetails(string movieID)

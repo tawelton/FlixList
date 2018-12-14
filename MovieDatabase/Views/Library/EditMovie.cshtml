@@ -14,6 +14,7 @@
             <img src="@Model.movie.posterURL" alt="@Model.movie.title" />
         </div>
         <div class="col-md-8">
+            
             <dl class="dl-horizontal">
                 <dt>
    
@@ -41,17 +42,27 @@
 <div class="container">
     @using (Html.BeginForm())
     {
-        foreach(var location in Model.locations)
-        {
-            <label class="col-xs-4 col-md-1 image-checkbox">
-                <img src="@location.logoURL" alt="@location.description" class="movie-logo-grid img-responsive" />
-                @Html.CheckBoxFor(model => location.selected)
-                <center>@location.description</center>
-            </label>
-        }
+        <table class="table">
+            <tr>
+                @for (int i = 0; i < Model.locations.Count(); i++)
+                {
+                    <th><img src="@Model.locations[i].logoURL" alt="@Model.locations[i].description" class="movie-logo" /></th>
+                }
+            </tr>
+            <tr>
+                @for (int i = 0; i < Model.locations.Count(); i++)
+                {
+                    <td>
+                        <center>
+                            @Html.CheckBoxFor(model => model.locations[i].selected)
+                        </center>
+                    </td>
+                }
+            </tr>
 
+        </table>
 
-        <input type="submit" class="btn btn-primary" />
+        <input type="submit" class="btn btn-primary mb-5"/>
     }
 </div>
 
