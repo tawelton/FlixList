@@ -73,10 +73,13 @@ namespace MovieDatabase.Controllers
                     }
                     else
                     {
-                        UserLibrary itemToAdd = new UserLibrary() { userID = currentUser, locationID = l.locationID, movieID = model.movie.movieID };
+                        if (db.UserLibraries.FirstOrDefault(ul => ul.userID == currentUser && ul.movieID == model.movie.movieID && ul.locationID == l.locationID) == null)
+                        {
+                            UserLibrary itemToAdd = new UserLibrary() { userID = currentUser, locationID = l.locationID, movieID = model.movie.movieID };
 
-                        db.UserLibraries.Add(itemToAdd);
-                        db.SaveChanges();
+                            db.UserLibraries.Add(itemToAdd);
+                            db.SaveChanges();
+                        }
                     }
                 }
                 return RedirectToAction("MyLibrary");
