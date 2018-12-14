@@ -33,7 +33,7 @@ namespace MovieDatabase.Controllers
 
             if (movie == null)
             {
-                RedirectToAction("Index");
+                return RedirectToAction("MyLibrary");
             }
 
             List<Location> locations = db.Locations.ToList();
