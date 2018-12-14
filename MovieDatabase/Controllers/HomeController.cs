@@ -49,11 +49,18 @@ namespace MovieDatabase.Controllers
             {
                 return RedirectToAction("Movies");
             }
+
+            if (db.UserLibraries.Find(movieIDParsed) != null)
+            {
+                ViewBag.ButtonText = "Edit Locations";
+            }
             else
             {
-                return View(selectedMovie.First());
+                ViewBag.ButtonText = "Add to Library";
             }
 
+            return View(selectedMovie.First());
+            
         }
 
         public ActionResult Contact()
