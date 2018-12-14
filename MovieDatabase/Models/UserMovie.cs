@@ -16,8 +16,8 @@ namespace MovieDatabase.Models
         } 
         public UserMovie (Movie mMovie, List<Location> lLocations)
         {
-            movie = mMovie;
-            locations = lLocations;
+            this.movie = mMovie;
+            this.locations = lLocations;
         }
     }
 }
