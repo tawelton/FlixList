@@ -14,6 +14,7 @@
             <img src="@Model.movie.posterURL" alt="@Model.movie.title" />
         </div>
         <div class="col-md-8">
+            
             <dl class="dl-horizontal">
                 <dt>
                     @Html.DisplayNameFor(model => model.movie.yearReleased)
@@ -43,9 +44,15 @@
     {
         <table class="table">
             <tr>
+                @Html.HiddenFor(model => model.movie.movieID)
                 @for (int i = 0; i < Model.locations.Count(); i++)
                 {
-                    <th><img src="@Model.locations[i].logoURL" alt="@Model.locations[i].description" class="movie-logo" /></th>
+                    <th>
+                        <center>
+                            <img src="@Model.locations[i].logoURL" alt="@Model.locations[i].description" class="movie-logo" />
+
+                        </center>
+                    </th>
                 }
             </tr>
             <tr>
@@ -53,6 +60,7 @@
                 {
                     <td>
                         <center>
+                            @Html.HiddenFor(model => model.locations[i].locationID)
                             @Html.CheckBoxFor(model => model.locations[i].selected)
                         </center>
                     </td>
@@ -61,6 +69,6 @@
 
         </table>
 
-        <input type="submit" class="btn btn-primary" />
+        <input type="submit" class="btn btn-primary mb-5"/>
     }
 </div>

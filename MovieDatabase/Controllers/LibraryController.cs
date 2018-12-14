@@ -27,9 +27,9 @@ namespace MovieDatabase.Controllers
             return View(userLibrary);
         }
 
-        public ActionResult EditMovie(int id)
+        public ActionResult EditMovie(int movieID)
         {
-            Movie movie = db.Movies.FirstOrDefault(m => m.movieID == id);
+            Movie movie = db.Movies.FirstOrDefault(m => m.movieID == movieID);
 
             if (movie == null)
             {
@@ -39,7 +39,7 @@ namespace MovieDatabase.Controllers
             List<Location> locations = db.Locations.ToList();
             string userId = User.Identity.GetUserId();
 
-            List<int> userLocationIds = db.Database.SqlQuery<int>("SELECT locationID FROM UserLibrary WHERE userID = '" + userId + "' AND movieID = '" + id + "';").ToList();
+            List<int> userLocationIds = db.Database.SqlQuery<int>("SELECT locationID FROM UserLibrary WHERE userID = '" + userId + "' AND movieID = '" + movieID + "';").ToList();
 
             foreach (Location l in locations)
             {
@@ -57,8 +57,35 @@ namespace MovieDatabase.Controllers
         [HttpPost]
         public ActionResult EditMovie(UserMovie model)
         {
+            string currentUser = User.Identity.GetUserId();
+            if (ModelState.IsValid)
+            {
+                foreach (Location l in model.locations)
+                {
+                    if (!l.selected)
+                    {
+                        var itemToRemove = db.UserLibraries.FirstOrDefault(ul => ul.userID == currentUser && ul.movieID == model.movie.movieID && ul.locationID == l.locationID);
+                        if (itemToRemove != null)
+                        {
+                            db.UserLibraries.Remove(itemToRemove);
+                            db.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        UserLibrary itemToAdd = new UserLibrary() { userID = currentUser, locationID = l.locationID, movieID = model.movie.movieID };
 
-            return View(model.movie.movieID);
+                        db.UserLibraries.Add(itemToAdd);
+                        db.SaveChanges();
+                    }
+                }
+                return RedirectToAction("MyLibrary");
+            }
+            else
+            {
+                return View(model.movie.movieID);
+            }
+            
         }
 
         public ActionResult MyMovieDetails(string movieID)
