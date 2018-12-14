@@ -706,6 +706,7 @@
     <Content Include="Theme\vendor\jquery.cookie\cookie.jquery.json" />
     <Content Include="Views\Home\MovieDetails.cshtml" />
     <Content Include="Views\Library\MyMovieDetails.cshtml" />
+    <Content Include="Views\Library\EditMovie.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Theme\vendor\font-awesome\less\" />

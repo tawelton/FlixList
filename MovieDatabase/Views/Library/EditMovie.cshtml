@@ -1,0 +1,66 @@
+﻿@model MovieDatabase.Models.UserMovie
+
+@{
+    ViewBag.Title = "EditMovie";
+}
+
+
+<div class="container">
+    <hr />
+    <h2>@Model.movie.title</h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-4>">
+            <img src="@Model.movie.posterURL" alt="@Model.movie.title" />
+        </div>
+        <div class="col-md-8">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.movie.yearReleased)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.movie.yearReleased)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.movie.rating)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.movie.rating)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.movie.description)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.movie.description)
+                </dd>
+            </dl>
+        </div>
+
+    </div>
+</div>
+<div class="container">
+    @using (Html.BeginForm())
+    {
+        <table class="table">
+            <tr>
+                @for (int i = 0; i < Model.locations.Count(); i++)
+                {
+                    <th><img src="@Model.locations[i].logoURL" alt="@Model.locations[i].description" class="movie-logo" /></th>
+                }
+            </tr>
+            <tr>
+                @for (int i = 0; i < Model.locations.Count(); i++)
+                {
+                    <td>
+                        <center>
+                            @Html.CheckBoxFor(model => model.locations[i].selected)
+                        </center>
+                    </td>
+                }
+            </tr>
+
+        </table>
+
+        <input type="submit" class="btn btn-primary" />
+    }
+</div>

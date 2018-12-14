@@ -54,6 +54,13 @@ namespace MovieDatabase.Controllers
             return View(UserMovieModel);
         }
 
+        [HttpPost]
+        public ActionResult EditMovie(UserMovie model)
+        {
+
+            return View(model.movie.movieID);
+        }
+
         public ActionResult MyMovieDetails(string movieID)
         {
             int movieIDParsed = int.TryParse(movieID, out movieIDParsed) ? movieIDParsed : -1;
