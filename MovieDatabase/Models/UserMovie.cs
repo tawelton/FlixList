@@ -12,10 +12,9 @@ namespace MovieDatabase.Models
 
         public UserMovie()
         {
-
-        }
-
-        public UserMovie(Movie mMovie, List<Location> lLocations)
+            locations = new List<Location>();
+        } 
+        public UserMovie (Movie mMovie, List<Location> lLocations)
         {
             this.movie = mMovie;
             this.locations = lLocations;
