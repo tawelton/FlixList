@@ -64,7 +64,7 @@ namespace MovieDatabase.Controllers
                 {
                     if (!l.selected)
                     {
-                        var itemToRemove = db.UserLibraries.FirstOrDefault(ul => ul.userID == currentUser && ul.movieID == model.movie.movieID && ul.locationID == l.locationID);
+                        UserLibrary itemToRemove = db.UserLibraries.FirstOrDefault(ul => ul.userID == currentUser && ul.movieID == model.movie.movieID && ul.locationID == l.locationID);
                         if (itemToRemove != null)
                         {
                             db.UserLibraries.Remove(itemToRemove);
