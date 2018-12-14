@@ -16,7 +16,8 @@
         <div class="col-md-8">
             <dl class="dl-horizontal">
                 <dt>
-                    @Html.DisplayNameFor(model => model.movie.yearReleased)
+   
+</div>                 @Html.DisplayNameFor(model => model.movie.yearReleased)
                 </dt>
                 <dd>
                     @Html.DisplayFor(model => model.movie.yearReleased)
@@ -37,30 +38,42 @@
         </div>
 
     </div>
-</div>
 <div class="container">
     @using (Html.BeginForm())
     {
-        <table class="table">
-            <tr>
-                @for (int i = 0; i < Model.locations.Count(); i++)
-                {
-                    <th><img src="@Model.locations[i].logoURL" alt="@Model.locations[i].description" class="movie-logo" /></th>
-                }
-            </tr>
-            <tr>
-                @for (int i = 0; i < Model.locations.Count(); i++)
-                {
-                    <td>
-                        <center>
-                            @Html.CheckBoxFor(model => model.locations[i].selected)
-                        </center>
-                    </td>
-                }
-            </tr>
+        foreach(var location in Model.locations)
+        {
+            <label class="col-xs-4 col-md-1 image-checkbox">
+                <img src="@location.logoURL" alt="@location.description" class="movie-logo-grid img-responsive" />
+                @Html.CheckBoxFor(model => location.selected)
+                <center>@location.description</center>
+            </label>
+        }
 
-        </table>
 
         <input type="submit" class="btn btn-primary" />
     }
 </div>
+
+<script type="text/javascript">
+    // image gallery
+    // init the state from the input
+    $(".image-checkbox").each(function () {
+        if ($(this).find('input[type="checkbox"]').first().attr("checked")) {
+            $(this).addClass('image-checkbox-checked');
+        }
+        else {
+            $(this).removeClass('image-checkbox-checked');
+        }
+    });
+
+    // sync the state to the input
+    $(".image-checkbox").on("click", function (e) {
+        $(this).toggleClass('image-checkbox-checked');
+        var $checkbox = $(this).find('input[type="checkbox"]');
+        $checkbox.prop("checked", !$checkbox.prop("checked"))
+
+        e.preventDefault();
+    });
+</script>
+

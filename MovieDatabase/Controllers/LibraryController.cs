@@ -27,9 +27,9 @@ namespace MovieDatabase.Controllers
             return View(userLibrary);
         }
 
-        public ActionResult EditMovie(int id)
+        public ActionResult EditMovie(int movieID)
         {
-            Movie movie = db.Movies.FirstOrDefault(m => m.movieID == id);
+            Movie movie = db.Movies.FirstOrDefault(m => m.movieID == movieID);
 
             if (movie == null)
             {
@@ -39,7 +39,7 @@ namespace MovieDatabase.Controllers
             List<Location> locations = db.Locations.ToList();
             string userId = User.Identity.GetUserId();
 
-            List<int> userLocationIds = db.Database.SqlQuery<int>("SELECT locationID FROM UserLibrary WHERE userID = '" + userId + "' AND movieID = '" + id + "';").ToList();
+            List<int> userLocationIds = db.Database.SqlQuery<int>("SELECT locationID FROM UserLibrary WHERE userID = '" + userId + "' AND movieID = '" + movieID + "';").ToList();
 
             foreach (Location l in locations)
             {
